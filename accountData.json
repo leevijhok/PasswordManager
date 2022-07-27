@@ -1,0 +1,25 @@
+{
+    "Info" : "DO NOT MODIFY THE CONTENTS OF THIS FILE!",
+
+    "Accounts": 
+    {
+        "exampleSite" :
+            [
+                {
+                    "Username" : "JohnDoe",
+                    "E-Mail" : "JohnDoe@gmail.com",
+                    "Password" : "Password123",
+                    "Updated_Previously" : "21.3.2019"
+                }
+            ],
+        "signin.ebay.com" :
+            [
+                {
+                    "Username" : "JohnDoe",
+                    "E-Mail" : "JohnDoe@gmail.com",
+                    "Password" : "Password123",
+                    "Updated_Previously" : "21.3.2019"
+                }
+            ]      
+    }
+}
