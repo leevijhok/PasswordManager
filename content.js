@@ -23,19 +23,28 @@ async function sendPageInfo()
     chrome.runtime.sendMessage(message);
 }
 
+/**
+ * Refreshes the pop-up, when page becomes visible.
+ */
 function handleVisibility()
 {
-    if (!document.hidden && typeof chrome.app.isInstalled !== 'undefined'){
+    if (!document.hidden){
         sendPageInfo();
-    }
-    else
-    {
-        console.info("Manager updated. Refresh window or restart Chrome.")
-        document.removeEventListener("visibilitychange", handleVisibility);
     }
 }
 
+/**
+ * Disables eventlisteners on update.
+ */
+function disconnect()
+{
+    console.info("Manager updated. Refresh window or restart Chrome.");
+    document.removeEventListener("visibilitychange", handleVisibility);
+}
+
+
 document.addEventListener("visibilitychange", handleVisibility);
+chrome.runtime.connect().onDisconnect.addListener(disconnect);
 
 
 sendPageInfo();

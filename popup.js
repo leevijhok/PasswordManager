@@ -9,8 +9,8 @@ function makeTable(accounts)
     let headRow = document.createElement("tr");
 
     // Arrays made to lessen the amount code required for the for-loops.
-    const headings = ["Username", "E-Mail", "Password", "Updated Previously"];
-    const accountHeadings = ["Username", "E-Mail", "Password", "Updated_Previously"];
+    const headings = ["Username", "E-Mail", "Password", "Updated"];
+    const accountHeadings = ["Username", "E-Mail", "Password", "Updated"];
 
     // Makes table headings.
     for(let i=0; i<headings.length; i++)
@@ -45,33 +45,33 @@ function makeTable(accounts)
 
      chrome.runtime.sendMessage({command : "getPageInfo"}, (response) => {
 
-        let heading = document.getElementById("pageURL");
+        let pageUrl = document.getElementById("pageURL");
         let tableHead = document.getElementById("tableHeading");
 
         // Checks if response is NULL.
         if(Object.keys(response).length == 0 ||
             response.url == undefined || response.accounts == undefined)
         {
-            heading.textContent = "Something went wrong."
-            tableHead.textContent = "";
+            pageUrl.textContent = "NO_URL"
+            tableHead.textContent = "Something went wrong. Refresh.";
             return;
         }
 
-        heading.textContent = response.url;
+        pageUrl.textContent = response.url;
 
         // Checks if page has an passwordfield and whether person has an account.
         if(response.accounts.length > 0 && response.pFieldStatus == true)
         {
-            tableHead.textContent = "Accounts registered on this page:";
+            tableHead.textContent = response.accounts.length + " accounts found."
             makeTable(response.accounts);
         }
         else if(response.pFieldStatus == true)
         {
-            tableHead.textContent = "No registered accounts on this page.";
+            tableHead.textContent = "No accounts found";
         }
         else
         {
-            tableHead.textContent = "No passwordfield on this page."
+            tableHead.textContent = "No passwordfields."
         }
         
       });
